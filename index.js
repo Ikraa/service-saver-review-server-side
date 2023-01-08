@@ -32,6 +32,11 @@ const run = async () => {
       const result = await serviceCollection.insertOne(data);
       res.send(result);
     });
+    app.get("/service", async (req, res) => {
+      const result = await serviceCollection.find({}).toArray();
+      // console.log(object);
+      res.send(result);
+    });
   } finally {
   }
 };
