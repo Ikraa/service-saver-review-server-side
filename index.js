@@ -26,6 +26,7 @@ const run = async () => {
     await client.connect();
     const serviceCollection = client.db("Service_Saver").collection("Services");
     const reviewCollection = client.db("Service_Saver").collection("Review");
+    const messageCollection = client.db("Service_Saver").collection("Message");
 
     app.post("/service", async (req, res) => {
       const data = req.body;
@@ -70,6 +71,13 @@ const run = async () => {
 
       const result = await reviewCollection.deleteOne({ _id: ObjectId(id) });
 
+      res.send(result);
+    });
+
+    app.post("/message", async (req, res) => {
+      const data = req.body;
+
+      const result = await messageCollection.insertOne(data);
       res.send(result);
     });
   } finally {
